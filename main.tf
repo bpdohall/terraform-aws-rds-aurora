@@ -171,6 +171,10 @@ resource "aws_rds_cluster_instance" "this" {
     delete = lookup(var.instance_timeouts, "delete", null)
   }
 
+  lifecycle {
+    ignore_changes = [ instance_class ]
+  }
+
   # TODO - not sure why this is failing and throwing type mis-match errors
   # tags = merge(var.tags, lookup(each.value, "tags", {}))
   tags = var.tags
